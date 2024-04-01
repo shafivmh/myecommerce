@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} E-Store {% endblock %}
+{% block content %}
+{% if category %}
+<div>
+ <div>
+  <p class="text-center"><a href="{% url 'allproducts' %}">Our Products Category</a></p>
+ </div>
+</div>
+{% endif %}
+<div>
+    {% if category %}
+    <img src="{{category.image.url}}" alt="{{category.name}}" style="width:1540px; height:400px;">
+    </div>
+<br>
+<div>
+    <h1>{{category.name}}</h1>
+    <p>{{category.description}}</p>
+
+    </div>
+
+{% else %}
+<div>
+  <img src="{% static 'img/wallshop.jpg' %}" alt="Products collection" style="width:1600px; height:600px;">
+</div>
+<br>
+
+<div>
+  <h1>Our production collection</h1>
+  <p>Discover a world of style and convenience at [myshop]. Shop the latest trends in fashion, tech, and home essentials with ease. Unbeatable deals, secure transactions, and fast delivery await you. Join our community and redefine your shopping journey. Elevate your experience at [myshop.com]!</p>
+</div>
+
+{% endif %}
+
+
+
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-9 col-sm-12 col-md-4 col-lg-4">
+          <div class="card" style="width: 18rem;">
+              <a href="{{product.get_url}}"><img class="card-img-top" src="{{product.image.url}}" style="width:150px; height:150px;" alt="{{product.name}}"></a>
+          <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">{{product.price}}</p>
+    </div>
+    </div>
+    </div>
+        {% endfor %}
+        </div>
+</div>
+
+{% endblock content %}
